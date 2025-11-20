@@ -1,0 +1,40 @@
+@model Pecoraro_Lillian_HW5.Models.OrderDetail
+
+<h1>Add Order Item</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Hidden OrderID -->
+            <input type="hidden" name="OrderID" value="@Model.Order.OrderID" />
+
+            <!-- Product Dropdown -->
+            <div class="form-group mb-3">
+                <label>Product</label>
+                <select name="SelectedProduct"
+                        asp-items="(SelectList)ViewBag.AllProducts"
+                        class="form-control">
+                    <option value="">-- Select Product --</option>
+                </select>
+            </div>
+
+            <!-- Quantity -->
+            <div class="form-group mb-3">
+                <label>Quantity</label>
+                <input type="number" name="Quantity" value="1" class="form-control" min="1" />
+            </div>
+
+            <input type="submit" value="Add to Order" class="btn btn-primary" />
+        </form>
+
+        <div class="mt-3">
+            <a asp-controller="Orders" asp-action="Details" asp-route-id="@Model.Order.OrderID">
+                Back to Order
+            </a>
+        </div>
+    </div>
+</div>

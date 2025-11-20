@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Pecoraro_Lillian_HW5.Models
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+        <a asp-controller="Account"
+           asp-action="Index"
+           class="nav-link text-light">
+            Hello @UserManager.GetUserName(User)!
+        </a>
+    </li>
+    <li class="nav-item">
+        <form asp-controller="Account" asp-action="LogOff" method="post">
+            <button type="submit" class="btn nav-link text-light" style="background:none;border:none;">
+                Log Off
+            </button>
+        </form>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a asp-controller="Account"
+           asp-action="Register"
+           class="nav-link text-light">
+            Register
+        </a>
+    </li>
+    <li class="nav-item">
+        <a asp-controller="Account"
+           asp-action="Login"
+           class="nav-link text-light">
+            Log in
+        </a>
+    </li>
+}

@@ -1,0 +1,34 @@
+﻿<div class="text-center">
+
+    <h1>Welcome to Our Book Store!</h1>
+
+    <p>
+
+        <!-- Everyone sees this -->
+        <a class="btn btn-success btn-lg" asp-controller="Products" asp-action="Index">
+            View Our Products
+        </a>
+
+        <!-- Admins AND Customers see this -->
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a class="btn btn-info btn-lg" asp-controller="Orders" asp-action="Index">
+                View Orders
+            </a>
+        }
+
+        <!-- Admin-only buttons -->
+        @if (User.IsInRole("Admin"))
+        {
+            <a class="btn btn-danger btn-lg" asp-controller="Suppliers" asp-action="Index">
+                View Suppliers
+            </a>
+
+            <a class="btn btn-warning btn-lg" asp-controller="RoleAdmin" asp-action="Index">
+                Manage Users
+            </a>
+        }
+
+    </p>
+
+</div>

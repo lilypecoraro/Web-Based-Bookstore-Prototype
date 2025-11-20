@@ -1,0 +1,65 @@
+@model Pecoraro_Lillian_HW5.Models.Product
+
+@{
+    ViewData["Title"] = "Create Product";
+}
+
+<h1>Create Product</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Name -->
+            <div class="form-group mb-2">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group mb-2">
+                <label asp-for="Description"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <!-- Price -->
+            <div class="form-group mb-2">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <!-- Product Type -->
+            <div class="form-group mb-3">
+                <label asp-for="ProductType"></label>
+                <select asp-for="ProductType"
+                        asp-items="Html.GetEnumSelectList<ProductType>()"
+                        class="form-control">
+                    <option value="">-- Select Type --</option>
+                </select>
+                <span asp-validation-for="ProductType" class="text-danger"></span>
+            </div>
+
+            <!-- Suppliers (Multi-select Listbox) -->
+            <div class="form-group mb-3">
+                <label>Suppliers</label>
+                <select name="SelectedSuppliers"
+                        asp-items="(MultiSelectList)ViewBag.AllSuppliers"
+                        class="form-control"
+                        multiple size="6">
+                </select>
+            </div>
+
+            <!-- Submit -->
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </form>
+
+        <div class="mt-3">
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</div>

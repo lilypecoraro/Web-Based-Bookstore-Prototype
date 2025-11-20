@@ -1,0 +1,46 @@
+@model IEnumerable<Pecoraro_Lillian_HW5.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+@if (User.IsInRole("Customer"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Order Number</th>
+            <th>Order Date</th>
+            <th>Order Notes</th>
+            <th>Order Total</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.OrderNumber</td>
+                <td>@item.OrderDate.ToShortDateString()</td>
+                <td>@item.OrderNotes</td>
+                <td>@item.Total.ToString("C")</td>
+
+                <td>
+                    @* Customers can only edit their own orders. Admins can edit all. *@
+                    @if (User.IsInRole("Admin") || User.IsInRole("Customer"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.OrderID">Edit</a>
+}
+                    <a asp-action="Details" asp-route-id="@item.OrderID">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

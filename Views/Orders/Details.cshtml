@@ -1,0 +1,71 @@
+@model Pecoraro_Lillian_HW5.Models.Order
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<h4>Order</h4>
+<hr />
+
+<div>
+    <dl class="row">
+
+        <dt class="col-sm-3">Customer Email</dt>
+        <dd class="col-sm-9">@Model.Customer?.Email</dd>
+
+        <dt class="col-sm-3">Order Number</dt>
+        <dd class="col-sm-9">@Model.OrderNumber</dd>
+
+        <dt class="col-sm-3">Order Date</dt>
+        <dd class="col-sm-9">@Model.OrderDate</dd>
+
+        <dt class="col-sm-3">Order Notes</dt>
+        <dd class="col-sm-9">@Model.OrderNotes</dd>
+    </dl>
+</div>
+
+<h4>Products on this Order</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Extended Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderDetails)
+        {
+            <tr>
+                <td>@item.Product.Name</td>
+                <td>@item.ProductPrice.ToString("C")</td>
+                <td>@item.Quantity</td>
+                <td>@item.ExtendedPrice.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Order Summary</h4>
+<table class="table table-bordered" style="width:250px">
+    <tr>
+        <th>Order Summary</th>
+    </tr>
+    <tr>
+        <td>Order Subtotal: @Model.Subtotal.ToString("C")</td>
+    </tr>
+    <tr>
+        <td>Sales Tax: @Model.SalesTax.ToString("C")</td>
+    </tr>
+    <tr>
+        <td>Order Total: @Model.Total.ToString("C")</td>
+    </tr>
+</table>
+
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.OrderID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</p>
